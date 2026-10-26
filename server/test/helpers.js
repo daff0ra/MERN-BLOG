@@ -12,6 +12,10 @@ function createResponse() {
       this.body = body;
       return this;
     },
+    end() {
+      this.ended = true;
+      return this;
+    },
     cookie(name, value, options) {
       this.cookies.push({ name, value, options });
       return this;

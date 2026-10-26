@@ -30,7 +30,7 @@ test('authenticate attaches the user for a valid token', async (t) => {
   User.findById = (id) => {
     assert.equal(id, 'user-1');
     return { select: async (fields) => {
-      assert.equal(fields, '_id username email');
+      assert.equal(fields, '_id username email profile');
       return user;
     } };
   };
