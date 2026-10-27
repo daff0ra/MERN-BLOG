@@ -1,0 +1,32 @@
+.topic-field input,
+.profile-form input,
+.profile-form textarea,
+.auth-card input {
+  display: block;
+  width: 100%;
+  border: 1px solid #e2e8e1;
+  background: #fff;
+  border-radius: 5px;
+  padding: 10px 11px;
+  margin-top: 8px;
+  color: #435248;
+  font-size: 11px;
+  outline: none;
+}
+
+.topic-field input::placeholder,
+.profile-form input::placeholder,
+.profile-form textarea::placeholder {
+  color: #b1b9b2;
+}
+
+.profile-form input,
+.profile-form textarea {
+  font-weight: 400;
+  font-size: 12px;
+  margin-top: 7px;
+}
+
+.profile-form textarea {
+  resize: vertical;
+}

@@ -1,0 +1,61 @@
+.topic-field input:focus,
+.profile-form input:focus,
+.profile-form textarea:focus,
+.auth-card input:focus {
+  box-shadow: 3px 3px 0 #171717;
+}
+
+.profile-form label,
+.auth-card label {
+  color: #34332d;
+  font-weight: 700;
+}
+
+.auth-screen {
+  background-color: #f7f5ed;
+  background-image: linear-gradient(#d4d0c4 1px, transparent 1px), linear-gradient(90deg, #d4d0c4 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.auth-brand {
+  color: #171717;
+}
+
+.auth-card {
+  border: 2px solid #171717;
+  border-radius: 5px;
+  background: var(--surface-warm);
+  box-shadow: 7px 7px 0 #171717;
+}
+
+.auth-card h1 {
+  font-weight: 800;
+  color: #171717;
+}
+
+.auth-card > p {
+  color: #625f56;
+}
+
+.auth-switch {
+  color: #625f56;
+}
+
+.auth-switch button {
+  color: #171717;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+.form-error {
+  background: var(--accent-coral);
+  border: 1.5px solid #171717;
+  border-radius: 4px;
+  color: #171717;
+  font-weight: 600;
+}
+
+.auth-footer {
+  color: #5d594f;
+}

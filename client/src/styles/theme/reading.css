@@ -1,0 +1,56 @@
+.reading-page {
+  background: #f7f5ed;
+  color: #171717;
+}
+
+.reading-header,
+.reading-footer {
+  border-color: #171717;
+}
+
+.reading-header {
+  color: #625f56;
+}
+
+.reading-article > h1 {
+  font-weight: 800;
+  color: #171717;
+}
+
+.reading-summary {
+  color: #57534b;
+}
+
+.author-line strong {
+  color: #171717;
+}
+
+.reading-divider {
+  height: 2px;
+  background: #171717;
+}
+
+.reading-content {
+  color: #38362f;
+}
+
+.preview-banner {
+  background: var(--accent-lime);
+  border: 1.5px solid #171717;
+  border-radius: 3px;
+  color: #171717;
+  font-weight: 700;
+}
+
+.reading-end {
+  border-color: #171717;
+  color: #5d594f;
+}
+
+.reading-end > span {
+  color: #171717;
+}
+
+.reading-footer {
+  color: #5d594f;
+}

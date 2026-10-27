@@ -1,0 +1,46 @@
+.welcome-row h1,
+.profile-page h1 {
+  font: 700 clamp(24px, 2.25vw, 31px)/1.25 var(--serif);
+  letter-spacing: -1.1px;
+  color: #2b3b32;
+  margin: 12px 0 7px;
+}
+
+.profile-page {
+  padding-top: 42px;
+  padding-bottom: 45px;
+  flex: 1;
+}
+
+.profile-page h1 {
+  margin: 12px 0 7px;
+}
+
+.profile-form {
+  margin-top: 28px;
+  padding: 24px;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 21px 18px;
+  max-width: 800px;
+}
+
+.wide-field {
+  grid-column: 1/-1;
+}
+
+.field-hint {
+  font-weight: 400;
+  color: #a0aaa2;
+  margin-left: 6px;
+}
+
+.profile-submit {
+  grid-column: 1/-1;
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 4px;
+}

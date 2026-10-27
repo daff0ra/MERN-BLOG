@@ -1,0 +1,17 @@
+.welcome-row h1,
+.profile-page h1 {
+  font-weight: 800;
+  color: #171717;
+  letter-spacing: -1.2px;
+}
+
+.profile-form {
+  background: var(--surface-warm);
+  border: 2px solid #171717;
+  border-radius: 5px;
+  box-shadow: 5px 5px 0 #171717;
+}
+
+.field-hint {
+  color: #77736b;
+}

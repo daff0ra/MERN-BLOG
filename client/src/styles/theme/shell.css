@@ -1,0 +1,106 @@
+.app-shell {
+  background: transparent;
+}
+
+.sidebar {
+  background: var(--surface-warm);
+  border-right: 2px solid #171717;
+  padding-top: 24px;
+}
+
+.workspace-label,
+.eyebrow {
+  color: #5b584f;
+  font-weight: 800;
+  letter-spacing: 1.3px;
+}
+
+.workspace-label {
+  margin-top: 45px;
+}
+
+.nav-item {
+  border: 1.5px solid transparent;
+  border-radius: 5px;
+  color: #4a4943;
+  font-weight: 600;
+  transition: transform .15s, box-shadow .15s, background .15s;
+}
+
+.nav-item:hover {
+  background: #f2f0e7;
+  border-color: #171717;
+  transform: translate(-2px, -2px);
+  box-shadow: 2px 2px 0 #171717;
+}
+
+.nav-item.active {
+  background: var(--accent-lime);
+  border: 1.5px solid #171717;
+  color: #171717;
+  box-shadow: 3px 3px 0 #171717;
+}
+
+.nav-item.active > span {
+  color: #171717;
+}
+
+.sidebar-tip {
+  background: var(--accent-blue);
+  border: 2px solid #171717;
+  border-radius: 5px;
+  box-shadow: 4px 4px 0 #171717;
+}
+
+.tip-icon {
+  background: #fff;
+  color: #171717;
+  border: 1.5px solid #171717;
+  border-radius: 4px;
+}
+
+.sidebar-tip strong,
+.sidebar-tip p {
+  color: #171717;
+}
+
+.user-chip {
+  border-top: 2px solid #171717;
+}
+
+.avatar {
+  background: var(--accent-coral);
+  border: 1.5px solid #171717;
+  color: #171717;
+}
+
+.topbar {
+  background: var(--surface-warm);
+  border-bottom: 2px solid #171717;
+}
+
+.breadcrumbs {
+  color: #77736b;
+}
+
+.breadcrumbs strong {
+  color: #171717;
+}
+
+.icon-button {
+  border: 1.5px solid #171717;
+  border-radius: 4px;
+  background: var(--accent-lime);
+  color: #171717;
+  box-shadow: 2px 2px 0 #171717;
+  transition: transform .12s, box-shadow .12s;
+}
+
+.icon-button:hover {
+  transform: translate(2px, 2px);
+  box-shadow: none;
+}
+
+.main-area {
+  background: rgba(247, 245, 237, .86);
+}

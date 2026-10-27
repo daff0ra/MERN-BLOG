@@ -1,17 +1,20 @@
-﻿# Panduan pengembangan client
+# Panduan pengembangan client
 
 ## Arsitektur saat ini
 
-Aplikasi menggunakan React 19, Vite, React Router, Axios, dan CSS biasa. Alur data dan tampilan dipisahkan agar perubahan bisa direview per bagian.
+Aplikasi menggunakan React 19, Vite, React Router, Axios, Tailwind CSS v4, dan stylesheet CSS untuk tema yang sudah ada.
 
 ```text
 src/
   App.jsx                 Komposisi dashboard dan orkestrasi aksi
   components/             Kartu artikel dan statistik
   context/AuthContext.jsx Sesi, login, registrasi, logout
-  pages/                  Editor, profil, autentikasi, pembacaan artikel
+  pages/                  Editor, profil, autentikasi, halaman publik
   services/api.js         Satu konfigurasi Axios dan modul endpoint
-  styles/                 Gaya dasar, tema, dan breakpoint
+  styles/
+    base/                 Fondasi dan gaya dasar per area
+    theme/                Token dan override visual per area
+    responsive/           Penyesuaian tablet, ponsel, dan override tema
 ```
 
 ### Navigasi
@@ -22,6 +25,7 @@ src/
 - `/dashboard/write`: editor karya
 - `/dashboard/profile`: profil penulis
 - `/read/:slug`: artikel publik
+- `/portfolio/:id`: portofolio publik
 - Pratinjau menggunakan state navigasi React Router, sehingga URL artikel publik tidak berubah.
 
 ### Akses API
@@ -32,17 +36,17 @@ Jika endpoint atau payload server berubah, sesuaikan service dan dokumentasikan 
 
 ## Styling dan desain
 
-- `styles/base.css` memuat aturan dasar layout dan komponen.
-- `styles/theme.css` memuat tema Neo-brutalist dan token warna.
-- `styles/responsive.css` memuat breakpoint yang menjaga layout pada tablet dan ponsel.
-- `index.css` mengimpor stylesheet dalam urutan font, dasar, tema, lalu responsif.
+- Tailwind CSS v4 dipakai untuk utility layout dan styling halaman baru. Plugin Vite terpasang di `vite.config.js`, sedangkan `index.css` menjadi entry point styling.
+- `styles/base/` menyimpan aturan dasar. File dipecah berdasarkan area seperti shell, dashboard, editor, profil, autentikasi, dan halaman baca.
+- `styles/theme/` menyimpan token Neo-brutalist dan override tema dengan pembagian area yang sama.
+- `styles/responsive/` memuat breakpoint lebar, tablet, ponsel, dan override tema responsif. `index.css` di tiap folder mencatat urutan impor.
 - Pertahankan palet krem dan outline hitam. Untuk aksen gunakan token seperti `--accent-lime`, `--accent-blue`, `--accent-coral`, `--accent-lavender`, `--accent-sand`, dan `--accent-mint`.
-- CSS masih global. Saat memindahkan aturan ke CSS Modules, migrasikan satu komponen beserta semua pemakaian class-nya, lalu periksa bahwa tidak ada selector global yang masih dibutuhkan.
+- Tailwind diimpor dengan mode `important` agar utility dapat digunakan berdampingan dengan selector global yang sudah ada.
 
 ## Alur kontribusi
 
 1. Tempatkan tampilan halaman di `pages/`, elemen UI yang dipakai ulang di `components/`, dan request HTTP di `services/`.
-2. Hindari memindahkan aturan warna ke inline style; gunakan token tema.
+2. Gunakan utility Tailwind untuk styling komponen baru. Untuk aturan CSS global yang sudah ada, edit file sesuai area dan hindari menambah override di akhir stylesheet.
 3. Untuk perubahan UI, pertahankan label kontrol, nama tombol yang jelas, dan indikator fokus keyboard.
 4. Jalankan `npm run lint` dan `npm run build` dari direktori `client` sebelum review.
 5. Perubahan kontrak API harus diselaraskan dengan server dan dicatat dalam dokumentasi.

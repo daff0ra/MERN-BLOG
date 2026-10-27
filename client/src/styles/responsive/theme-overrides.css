@@ -1,0 +1,36 @@
+@media (max-width: 780px) {
+  .sidebar {
+    background: #fffef8;
+    border-right: 2px solid #171717;
+  }
+
+  .nav-item.active {
+    box-shadow: 2px 2px 0 #171717;
+  }
+
+  .user-chip {
+    border-top: 2px solid #171717;
+  }
+
+  .article-card:hover {
+    padding-inline: 6px;
+  }
+}
+
+@media (max-width: 520px) {
+  .stat-card {
+    box-shadow: 3px 3px 0 #171717;
+  }
+
+  .stats-grid {
+    padding-top: 3px;
+  }
+
+  .article-card:hover {
+    padding-inline: 4px;
+  }
+
+  .auth-card {
+    box-shadow: 5px 5px 0 #171717;
+  }
+}

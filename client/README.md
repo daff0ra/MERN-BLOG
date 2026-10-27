@@ -24,9 +24,9 @@ src/
   pages/                  Tampilan tingkat halaman
   services/api.js         Modul akses endpoint dan konfigurasi Axios
   styles/
-    base.css              Aturan visual utama aplikasi
-    theme.css             Token dan lapisan tema Neo-brutalist
-    responsive.css        Penyesuaian tablet dan ponsel
+    base/                 Fondasi dan gaya dasar per area
+    theme/                Token dan override tema per area
+    responsive/           Breakpoint tablet, ponsel, dan override tema
   index.css               Font, reset, dan entry point stylesheet
 ```
 
@@ -36,17 +36,26 @@ src/
 - `components/` menyimpan bagian presentasi mandiri seperti kartu karya dan statistik.
 - `context/AuthContext.jsx` menangani sesi pengguna dan aksi autentikasi.
 - Semua request HTTP melalui `services/api.js`; jangan memanggil Axios langsung dari komponen atau context.
-- URL utama: `/dashboard`, `/dashboard/write`, `/dashboard/profile`, dan `/read/:slug`.
+- URL utama: `/dashboard`, `/dashboard/write`, `/dashboard/profile`, `/read/:slug`, dan `/portfolio/:id`.
 - Endpoint publikasi, profil, dan autentikasi didefinisikan berkelompok di modul service. Pertahankan payload sesuai kontrak server.
+
+### Route halaman publik
+
+| Halaman frontend | API publik | Cara navigasi di UI |
+| --- | --- | --- |
+| `/read/:slug` | `GET /api/public/articles/:slug` | Dashboard menyediakan **Buka artikel** dan **Salin tautan** untuk karya terbit. Karya public dan unlisted dapat dibaca lewat slug; karya private tidak memiliki tautan publik. |
+| `/portfolio/:id` | `GET /api/public/portfolios/:id` | Dashboard menyediakan tautan portofolio, dan halaman profil menyediakan **Lihat portofolio publik** ketika portofolio diaktifkan. Kartu karya pada portofolio membuka `/read/:slug`. Pilihan dan urutan diatur dari halaman profil melalui `GET/PATCH /api/profile/portfolio-articles`. |
+
+Di halaman artikel, tautan **Lihat portofolio penulis** hanya muncul jika penulis mengaktifkan portofolio publik. Dengan begitu, navigasi publik mengikuti pilihan privasi pemilik.
 
 ## Panduan styling
 
 - Pertahankan class semantik yang sudah ada saat memperbarui komponen agar visual dan breakpoint konsisten.
-- Aturan dasar dan komponen berada di `styles/base.css`; nilai tema dan override desain berada di `styles/theme.css`; breakpoint berada di `styles/responsive.css`.
-- Letakkan token warna baru pada `:root` di `theme.css`, bukan menambah override warna acak. Token aksen yang sudah tersedia meliputi lime, biru, koral, lavender, sand, dan mint.
-- Tambahkan aturan breakpoint di `responsive.css`. Gunakan pendekatan mobile-first untuk komponen baru dan pastikan layout tidak melebar pada viewport 320 px.
+- Aturan dasar dipecah menurut area di `styles/base/`; nilai tema dan override berada di `styles/theme/`; breakpoint berada di `styles/responsive/`. File `index.css` pada setiap folder mengatur urutan impor.
+- Letakkan token warna baru pada `:root` di `styles/theme/tokens.css`, bukan menambah override warna acak. Token aksen yang sudah tersedia meliputi lime, biru, koral, lavender, sand, dan mint.
+- Tambahkan aturan breakpoint di file yang sesuai dalam `styles/responsive/`. Gunakan pendekatan mobile-first untuk komponen baru dan pastikan layout tidak melebar pada viewport 320 px.
 - Gunakan `:focus-visible`, label yang terhubung ke kontrol, nama tombol yang jelas, dan kontras yang memadai.
-- CSS saat ini adalah CSS biasa yang dipecah menurut tanggung jawab file, tanpa framework tambahan. Ini menjaga bundle tetap ramping dan tidak mengubah hasil desain.
+- Tailwind CSS v4 digunakan untuk layout halaman portofolio dan pemilihan karya. Styling dasar aplikasi tetap memakai token dan stylesheet global yang sudah ada.
 
 ## Nilai UI saat ini
 
@@ -56,11 +65,11 @@ Penilaian heuristik berdasarkan implementasi yang tersedia, skala 1–5:
 | --- | ---: | --- |
 | Konsistensi visual | 4/5 | Palet krem, hitam, dan hijau neon konsisten; gaya kartu dan tombol memiliki bahasa yang jelas. |
 | Responsif | 3/5 | Breakpoint tablet dan ponsel tersedia. Sidebar menyusut menjadi ikon dan beberapa area beralih ke kolom. |
-| Aksesibilitas | 3/5 | Fokus keyboard dan beberapa label/region tersedia; ikon navigasi, dialog publikasi, serta status dinamis masih bisa ditingkatkan. |
+| Aksesibilitas | 3/5 | Fokus keyboard dan beberapa label/region tersedia; beberapa elemen dashboard dan input editor masih memerlukan audit lanjutan. |
 | Hierarki dan keterbacaan | 4/5 | Dashboard, statistik, status, dan aksi karya mudah dipindai. Ukuran teks kecil di beberapa metadata perlu dipantau. |
-| Pemeliharaan UI | 3,5/5 | Tampilan dipisahkan ke halaman dan komponen; request API dipusatkan dan navigasi memakai React Router. CSS tetap global sehingga masih berpotensi berbenturan. |
+| Pemeliharaan UI | 3,5/5 | Tampilan dipisahkan ke halaman dan komponen; halaman portofolio menggunakan utility Tailwind, sedangkan tampilan lama masih memakai stylesheet global. |
 
-Skor umum: **3,5/5**. Ini penilaian heuristik kode dan pola UI, bukan hasil audit pengguna atau pengukuran aksesibilitas otomatis. Prioritas berikutnya: migrasi bertahap ke CSS Modules dan audit navigasi keyboard serta screen reader.
+Skor umum: **3,5/5**. Ini penilaian heuristik kode dan pola UI, bukan hasil audit pengguna atau pengukuran aksesibilitas otomatis. Prioritas berikutnya: perluas penggunaan utility Tailwind saat halaman lama disentuh dan lanjutkan audit keyboard serta screen reader pada komponen lain.
 
 Catatan arsitektur dan alur kontribusi lebih rinci tersedia di [`docs/DEVELOPMENT.md`](docs/DEVELOPMENT.md).
 

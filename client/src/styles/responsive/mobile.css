@@ -1,0 +1,198 @@
+@media (max-width: 520px) {
+  .topbar {
+    padding-inline: 13px;
+  }
+
+  .breadcrumbs {
+    font-size: 10px;
+    gap: 7px;
+  }
+
+  .icon-button {
+    display: none;
+  }
+
+  .welcome-row,
+  .stats-grid {
+    padding-inline: 16px;
+  }
+
+  .welcome-row h1 {
+    font-size: 23px;
+  }
+
+  .welcome-copy {
+    font-size: 11px;
+    max-width: 320px;
+  }
+
+  .welcome-row > .primary-button {
+    font-size: 0;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 7px;
+  }
+
+  .stat-card {
+    min-height: 66px;
+    align-items: center;
+    padding: 10px 13px;
+  }
+
+  .stat-copy {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    column-gap: 8px;
+    flex: 1;
+  }
+
+  .stat-copy > span {
+    grid-column: 1;
+  }
+
+  .stat-copy strong {
+    grid-column: 2;
+    grid-row: 1/3;
+  }
+
+  .stat-copy small {
+    grid-column: 1;
+  }
+
+  .stat-arrow {
+    align-self: flex-start;
+  }
+
+  .content-section,
+  .footer {
+    margin-inline: 16px;
+  }
+
+  .filter-tabs {
+    gap: 15px;
+  }
+
+  .filter-tabs button {
+    font-size: 10px;
+  }
+
+  .article-title-row h3 {
+    font-size: 13px;
+  }
+
+  .article-summary {
+    font-size: 10px;
+  }
+
+  .article-actions {
+    justify-content: flex-start;
+  }
+
+  .row-action {
+    padding: 6px;
+  }
+
+  .footer span:nth-child(2) {
+    display: none;
+  }
+
+  .editor-page {
+    padding-inline: 16px !important;
+  }
+
+  .editor-top {
+    align-items: flex-start;
+  }
+
+  .editor-tools {
+    gap: 6px;
+  }
+
+  .editor-tools > .primary-button {
+    padding: 8px 10px;
+    font-size: 10px;
+  }
+
+  .back-button span {
+    font-size: 10px;
+  }
+
+  .editor-aside {
+    grid-template-columns: 1fr;
+  }
+
+  .private-note {
+    grid-column: auto;
+  }
+
+  .title-input {
+    font-size: 28px;
+  }
+
+  .profile-page {
+    padding-inline: 16px !important;
+  }
+
+  .profile-form {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .profile-form label,
+  .wide-field,
+  .profile-submit {
+    grid-column: 1;
+  }
+
+  .auth-screen {
+    padding-top: 33px;
+  }
+
+  .auth-brand {
+    margin-bottom: 35px;
+  }
+
+  .auth-card {
+    padding: 27px 23px;
+  }
+
+  .reading-page {
+    padding-inline: 17px;
+  }
+
+  .reading-header {
+    height: 60px;
+  }
+
+  .reading-header .brand {
+    font-size: 15px;
+  }
+
+  .reading-header .brand-mark {
+    width: 29px;
+    height: 29px;
+  }
+
+  .reading-header > span {
+    display: none;
+  }
+
+  .reading-article {
+    margin-top: 45px;
+  }
+
+  .reading-article > h1 {
+    font-size: 35px;
+  }
+
+  .reading-summary {
+    font-size: 15px;
+  }
+
+  .reading-content {
+    font-size: 14px;
+  }
+}

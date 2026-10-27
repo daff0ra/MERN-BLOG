@@ -1,0 +1,9 @@
+.topic-field input,
+.profile-form input,
+.profile-form textarea,
+.auth-card input {
+  border: 1.5px solid #171717;
+  border-radius: 4px;
+  background: #fff;
+  color: #171717;
+}

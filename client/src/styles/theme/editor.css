@@ -1,0 +1,97 @@
+.content-section {
+  border-top: 2px solid #171717;
+}
+
+.editor-page {
+  background: transparent;
+}
+
+.back-button {
+  color: #171717;
+  font-weight: 700;
+}
+
+.back-button:hover {
+  color: #536d00;
+}
+
+.save-state {
+  color: #55534d;
+}
+
+.save-state i {
+  background: #8cc500;
+  border: 1px solid #171717;
+}
+
+.title-input {
+  color: #171717;
+  font-weight: 800;
+}
+
+.title-input::placeholder {
+  color: #aaa69b;
+}
+
+.summary-input,
+.content-input {
+  color: #34332d;
+}
+
+.summary-input::placeholder,
+.content-input::placeholder {
+  color: #9a968b;
+}
+
+.editor-divider {
+  height: 2px;
+  background: #171717;
+}
+
+.content-label {
+  color: #171717;
+  font-weight: 800;
+}
+
+.writing-prompt {
+  color: #615e55;
+}
+
+.editor-aside .aside-card {
+  background: var(--accent-blue);
+  border: 2px solid #171717;
+  border-radius: 5px;
+  box-shadow: 4px 4px 0 #171717;
+}
+
+.aside-spark {
+  color: #171717;
+}
+
+.aside-card h3,
+.aside-card>p,
+.prompt-list span {
+  color: #171717;
+}
+
+.prompt-list {
+  border-color: #171717;
+}
+
+.prompt-list b {
+  color: #4e5148;
+}
+
+.topic-field {
+  color: #171717;
+  font-weight: 800;
+}
+
+.private-note {
+  color: #4f4c43;
+}
+
+.private-note>span,
+.private-note strong {
+  color: #171717;
+}

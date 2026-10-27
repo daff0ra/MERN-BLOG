@@ -1,0 +1,64 @@
+.publish-modal {
+  border: 2px solid #171717;
+  border-radius: 5px;
+  box-shadow: 8px 8px 0 #171717;
+}
+
+.modal-close {
+  color: #171717;
+}
+
+.modal-icon {
+  background: var(--accent-lime);
+  border: 1.5px solid #171717;
+  border-radius: 5px;
+  color: #171717;
+}
+
+.publish-modal h2 {
+  font-weight: 800;
+  color: #171717;
+}
+
+.publish-modal > p {
+  color: #625f56;
+}
+
+.visibility-option {
+  border: 1.5px solid #171717;
+  border-radius: 4px;
+  transition: background .12s, transform .12s;
+}
+
+.visibility-option:hover {
+  transform: translateX(2px);
+  background: #f7f5ed;
+}
+
+.visibility-option:focus-within {
+  outline: 3px solid #171717;
+  outline-offset: 3px;
+}
+
+.visibility-option.chosen {
+  border: 2px solid #171717;
+  background: #efffae;
+  box-shadow: 3px 3px 0 #171717;
+}
+
+.visibility-option strong {
+  color: #171717;
+}
+
+.visibility-option small {
+  color: #625f56;
+}
+
+.chosen .radio-custom {
+  border-color: #171717;
+}
+
+.text-button {
+  color: #37352f;
+  font-weight: 700;
+}

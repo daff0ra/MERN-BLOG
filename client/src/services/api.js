@@ -23,4 +23,7 @@ export const articleApi = {
 export const profileApi = {
   get: () => api.get('/api/profile'),
   update: (profile) => api.patch('/api/profile', profile),
+  getPortfolioArticles: () => api.get('/api/profile/portfolio-articles'),
+  updatePortfolioArticles: (articleIds) => api.patch('/api/profile/portfolio-articles', { articleIds }),
+  getPortfolio: (id) => api.get(`/api/public/portfolios/${encodeURIComponent(id)}`),
 }

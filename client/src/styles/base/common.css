@@ -1,0 +1,94 @@
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -.6px;
+  color: #26372e;
+  padding: 0 9px;
+}
+
+.brand-mark {
+  width: 34px;
+  height: 34px;
+  border-radius: 11px;
+  background: #496d57;
+  color: white;
+  display: inline-grid;
+  place-items: center;
+  font-family: var(--serif);
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  flex: none;
+}
+
+.brand-light {
+  font-weight: 500;
+  color: #7d9184;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.eyebrow-dot {
+  width: 6px;
+  height: 6px;
+  background: #77917d;
+  border-radius: 50%;
+}
+
+.primary-button,
+.secondary-button {
+  border-radius: 6px;
+  padding: 10px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background .15s, border .15s;
+  white-space: nowrap;
+}
+
+.primary-button {
+  color: white;
+  background: #496e56;
+  border: 1px solid #496e56;
+}
+
+.primary-button:hover {
+  background: #3a5f47;
+  border-color: #3a5f47;
+}
+
+.primary-button:disabled {
+  opacity: .6;
+  cursor: wait;
+}
+
+.welcome-row > .primary-button {
+  margin-bottom: 4px;
+}
+
+.welcome-row > .primary-button span {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 12px;
+}
+
+.secondary-button {
+  background: white;
+  border: 1px solid #dfe5df;
+  color: #526458;
+}
+
+.secondary-button:hover {
+  background: #f6f8f5;
+}

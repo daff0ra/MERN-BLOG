@@ -1,0 +1,28 @@
+:root {
+  --ink: #171717;
+  --muted: #55534d;
+  --line: #171717;
+  --green: #d4ff3f;
+  --green-dark: #171717;
+  --green-pale: #efffae;
+  --accent-lime: #d4ff3f;
+  --accent-lime-hover: #c3f02b;
+  --accent-blue: #c9efff;
+  --accent-coral: #ffad98;
+  --accent-coral-strong: #ff704f;
+  --accent-lavender: #eadbff;
+  --accent-sand: #ffe095;
+  --accent-mint: #c9f5b9;
+  --accent-green-soft: #cff7a8;
+  --surface-warm: #fffef8;
+  --paper: #fff;
+  --canvas: #f7f5ed;
+  --serif: 'DM Sans', sans-serif;
+}
+
+body {
+  background-color: #f7f5ed;
+  background-image: radial-gradient(#d4d0c4 1px, transparent 1px);
+  background-size: 17px 17px;
+  color: #171717;
+}
