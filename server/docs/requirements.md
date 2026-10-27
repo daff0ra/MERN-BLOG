@@ -68,9 +68,9 @@ Kriteria di bawah adalah kriteria penerimaan sistem yang bisa diuji. `MUST` bera
 
 ### AC-PORTFOLIO — halaman yang dibagikan
 
-**Given** portofolio aktif, **when** reviewer membuka tautannya tanpa login, **then** reviewer dapat melihat nama tampilan, ringkasan yang dipilih, dan karya yang secara eksplisit disertakan.  
+**Given** portofolio aktif, **when** reviewer membuka tautannya tanpa login, **then** reviewer dapat melihat profil yang ditampilkan dan hanya karya public yang dipilih pemilik, dengan urutan pilihan pemilik.
 **Given** portofolio tidak aktif atau slug tidak valid, **when** URL diminta, **then** sistem memberi halaman tidak ditemukan yang tidak mengungkap data privat.  
-**Given** penulis mengubah urutan atau pilihan karya, **when** perubahan disimpan, **then** urutan/daftar publik mengikuti konfigurasi terbaru.
+**Given** pemilik mengubah pilihan atau urutan karya, **when** perubahan disimpan, **then** urutan/daftar publik mengikuti konfigurasi terbaru.
 
 ### AC-PRIVACY — perlindungan data
 

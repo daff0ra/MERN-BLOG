@@ -4,7 +4,7 @@ Dokumen ini mencatat perubahan struktur dan fitur server yang telah dibuat, alas
 
 ## Ringkasan
 
-Server berkembang dari fondasi autentikasi menjadi API awal untuk portofolio naratif:
+Server dan client berkembang dari fondasi autentikasi menjadi aplikasi awal untuk portofolio naratif:
 
 - Autentikasi register/login/logout dan pemeriksaan sesi memakai JWT di cookie HttpOnly.
 - Profil profesional privat yang dapat dibaca dan diperbarui pemiliknya.
@@ -12,8 +12,9 @@ Server berkembang dari fondasi autentikasi menjadi API awal untuk portofolio nar
 - Preview khusus pemilik, publikasi eksplisit, unpublish, dan pembacaan karya melalui slug berbagi.
 - Test controller dan middleware memakai mock sehingga tidak memerlukan MongoDB untuk unit test.
 - Endpoint `GET /robots.txt` memberi crawler arahan untuk tidak mengindeks API.
+- Client React terhubung ke API profil/karya, serta menyediakan halaman portofolio publik yang dapat dibagikan.
 
-Fitur di atas berada di sisi API. UI React belum tersambung ke endpoint profil dan karya.
+Portofolio publik hanya menampilkan profil yang diizinkan dan karya yang berstatus public. Draft dan karya private tidak ditampilkan; karya unlisted tetap dapat dibaca melalui slug individual.
 
 ## Perubahan struktur
 
@@ -30,7 +31,8 @@ Penambahan modul utama:
 
 - `src/models/Article.js`, `src/controllers/articleController.js`, `src/routes/articleRoutes.js`
 - `src/controllers/profileController.js`, `src/routes/profileRoutes.js`
-- `src/routes/publicRoutes.js` untuk membaca karya terbit tanpa login
+- `src/routes/publicRoutes.js` untuk membaca karya terbit dan portofolio tanpa login
+- `client/src/pages/PublicPortfolio.jsx` dan `client/src/styles/portfolio.css` untuk halaman berbagi portofolio
 - `test/articleController.test.js` dan `test/profileController.test.js`
 
 ## Keputusan desain penting
@@ -49,7 +51,7 @@ Karya baru berstatus `draft` dan visibilitas `private`. Pengguna perlu memanggil
 
 ### Tautan berbagi tidak memakai ID database
 
-Untuk karya unlisted/public, server membuat slug acak dengan `crypto.randomBytes`. Slug disimpan terpisah dari ID MongoDB, hanya dibaca pada query pemilik, dan tidak dimasukkan ke respons publik. Unpublish atau perubahan visibilitas menjadi private menghapus slug agar tautan lama berhenti berfungsi.
+Untuk karya unlisted/public, server membuat slug acak dengan `crypto.randomBytes`. Slug disimpan terpisah dari ID MongoDB dan dikembalikan ke pemilik melalui API pengelolaan karya. Pada API publik artikel, slug tidak dikembalikan dalam payload; pada daftar portofolio publik, slug disertakan sebagai metadata navigasi agar kartu dapat membuka karya yang sesuai. Unpublish atau perubahan visibilitas menjadi private menghapus slug agar tautan lama berhenti berfungsi.
 
 ### Respons publik memakai allowlist
 
@@ -61,6 +63,8 @@ Endpoint publik membentuk respons berisi judul, isi, ringkasan, topik, nama penu
 |---|---|---|
 | `GET /api/profile` | Baca profil sendiri | Login |
 | `PATCH /api/profile` | Ubah field profil yang diizinkan | Login |
+| `GET /api/profile/portfolio-articles` | Baca daftar karya portofolio beserta urutannya | Login |
+| `PATCH /api/profile/portfolio-articles` | Pilih dan urutkan hingga 20 karya public milik sendiri | Login |
 | `GET /api/articles` | Daftar karya sendiri | Login |
 | `POST /api/articles` | Buat draft | Login |
 | `GET /api/articles/:id` | Baca karya sendiri | Login |
@@ -70,14 +74,17 @@ Endpoint publik membentuk respons berisi judul, isi, ringkasan, topik, nama penu
 | `POST /api/articles/:id/publish` | Terbitkan dengan visibilitas private/unlisted/public | Login, pemilik |
 | `POST /api/articles/:id/unpublish` | Kembali ke draft dan cabut slug | Login, pemilik |
 | `GET /api/public/articles/:slug` | Baca karya terbit melalui slug | Publik |
+| `GET /api/public/portfolios/:id` | Baca profil aktif dan daftar karya public | Publik |
 
 ## Validasi yang telah ditambahkan
 
 - Profil dan karya memakai Zod untuk memeriksa bentuk input sebelum akses database.
 - Field yang tidak dikenal ditolak pada operasi profil, create/update karya, dan publish.
 - Ukuran judul, isi, ringkasan, topik, keahlian, dan jumlah tautan dibatasi.
+- Tautan profesional dibatasi ke URL HTTP/HTTPS.
 - Request JSON dibatasi 10 KB pada aplikasi Express.
 - API publik hanya mencari karya berstatus `published` dengan visibilitas `unlisted` atau `public`.
+- Endpoint portofolio hanya memilih metadata karya yang diperlukan untuk kartu; isi lengkap tetap diambil melalui endpoint artikel publik tersendiri.
 
 ## Pemeriksaan otomatis
 
@@ -87,10 +94,14 @@ Unit test memakai mock dan tidak membuktikan bahwa konfigurasi MongoDB, index un
 
 ## Batas saat ini
 
-- Client React belum memanggil API profil, karya, preview, atau publikasi.
-- Belum ada halaman portofolio publik berisi profil dan daftar karya pilihan.
+- Pemilik dapat memilih dan mengurutkan hingga 20 karya portofolio; drag-and-drop belum tersedia, urutan diatur dengan tombol naik/turun.
+- Halaman portofolio memakai ID akun pada URL, belum memakai slug khusus yang mudah dibaca atau kontrol indeks mesin pencari.
 - `public` dan `unlisted` saat ini sama-sama dibaca lewat slug. Daftar publik untuk discovery belum dibuat.
 - Isi karya diperlakukan sebagai teks biasa; belum ada editor Markdown/rich text atau renderer.
 - Kebijakan produk untuk indeks mesin pencari, pelaporan, dan retensi/penghapusan akun masih perlu diputuskan.
+
+## Catatan revisi mendatang: fungsi induk portofolio publik
+
+`readPublicPortfolio()` pada `src/controllers/profileController.js` adalah fungsi induk dan titik paling berpengaruh untuk fitur ini. Fungsi tersebut memeriksa ID dan status publik profil, membaca pilihan karya pemilik, mempertahankan urutannya, lalu memvalidasi ulang status public sebelum mengirim metadata. Revisi berikutnya perlu mempertimbangkan pagination/batas jumlah karya, strategi cache, dan pengujian regresi privasi untuk profil nonaktif serta karya non-public. Perubahan pada fungsi ini berdampak langsung pada privasi seluruh portofolio publik.
 
 Dokumen kebutuhan dan rancangan produk tetap menjadi tujuan yang lebih luas; implementasi berjalan bertahap dan belum seluruh acceptance criteria terpenuhi.

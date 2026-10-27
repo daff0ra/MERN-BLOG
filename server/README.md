@@ -2,7 +2,7 @@
 
 ## Dokumen produk
 
-Rancangan pengembangan aplikasi menjadi portofolio naratif profesional tersedia di [`docs/`](./docs/README.md): konsep produk (PCD), kebutuhan pengguna, user story dan acceptance criteria, aliran data (DFO), serta persiapan delivery. Dokumen tersebut adalah rancangan target; implementasi saat ini mencakup autentikasi, profil dasar, draft karya, dan publikasi karya individual.
+Rancangan pengembangan aplikasi menjadi portofolio naratif profesional tersedia di [`docs/`](./docs/README.md): konsep produk (PCD), kebutuhan pengguna, user story dan acceptance criteria, aliran data (DFO), serta persiapan delivery. Implementasi saat ini juga mencakup halaman portofolio publik; beberapa kemampuan seperti pemilihan karya dan pengurutan manual masih menjadi pengembangan lanjutan.
 
 Catatan struktur perubahan ada di [`docs/refactor-notes.md`](./docs/refactor-notes.md). Panduan belajar lokal tersimpan di `docs/learning-guide.md` dan sengaja masuk `.gitignore`, jadi tidak diikutkan dalam commit Git.
 
@@ -14,6 +14,7 @@ Catatan struktur perubahan ada di [`docs/refactor-notes.md`](./docs/refactor-not
 - Vite client mem-proxy request `/api` ke server pada development.
 - Endpoint profil profesional privat (`GET` dan `PATCH /api/profile`) dengan allowlist field dan validasi.
 - CRUD karya dan draft privat (`/api/articles`), preview pemilik, serta publish/unpublish dengan pemeriksaan kepemilikan.
+- Halaman portofolio publik yang dapat diaktifkan pemilik, memuat profil profesional dan karya berstatus public.
 - `GET /robots.txt` menyajikan arahan crawler agar tidak mengindeks endpoint API.
 - Test auth, profil, dan karya dengan mock database, serta test endpoint robots. Jalankan dengan `npm test`.
 
@@ -31,11 +32,15 @@ Test saat ini mencakup validasi dan hashing register, email duplikat, login berh
 - `POST /api/auth/login` accepts `{ "email", "password" }` and returns the same public user shape with a new cookie.
 - `POST /api/auth/logout` clears the cookie. A GET alias remains for the starter client compatibility; clients should migrate to POST.
 - `GET /api/auth/me` verifies the cookie and returns the current public user.
-- `GET /api/profile` returns the authenticated user's professional profile. `PATCH /api/profile` updates one or more of `displayName`, `summary`, `field`, `skills` (up to 10), and `links` (up to 5 valid URLs). Unknown fields are rejected.
+- `GET /api/profile` returns the authenticated user's professional profile. `PATCH /api/profile` updates one or more of `displayName`, `summary`, `field`, `skills` (up to 10), `links` (up to 5 HTTP(S) URLs), and `portfolioPublic`. Unknown fields are rejected. `GET/PATCH /api/profile/portfolio-articles` reads or saves the ordered list of up to 20 owned, published, public article IDs for the portfolio.
 - `GET/POST /api/articles`, `GET/PATCH/DELETE /api/articles/:id` manage the authenticated user's articles. `GET /api/articles/:id/preview` is owner-only. `POST /api/articles/:id/publish` accepts `{ "visibility": "private" | "unlisted" | "public" }`; `POST /api/articles/:id/unpublish` returns the article to a private draft and revokes its share slug. New drafts require a title and body; optional summary and topics are validated. Article ownership cannot be supplied or changed by the client.
-- `GET /api/public/articles/:slug` serves only published unlisted/public articles and returns an allowlisted author/content shape. Unlisted and public content can be read by anyone with its generated slug; public portfolio discovery/listing is not implemented yet. Article bodies are returned as plain text and clients must render them as text, not raw HTML.
+- `GET /api/public/articles/:slug` serves only published unlisted/public articles and returns an allowlisted author/content shape. Unlisted and public content can be read by anyone with its generated slug. The response includes `authorPortfolioId` only when the author enabled a public portfolio. Article bodies are returned as plain text and clients must render them as text, not raw HTML.
+- `GET /api/public/portfolios/:id` serves a shareable portfolio by account ID. It returns the public profile fields and only articles with `status: published` and `visibility: public`; unlisted works remain reachable only through their individual share links.
+
 - `GET /api/health` is a basic health check.
 - `GET /robots.txt` returns plain-text crawler rules with `/api/` disallowed. Robots rules are advisory and do not replace authentication or authorization.
+
+Route frontend publik: `/read/:slug` memuat karya publik/unlisted dan `/portfolio/:id` memuat portofolio. Dashboard menyediakan aksi **Buka artikel** dan **Salin tautan**, halaman profil/dashboard menyediakan tautan portofolio, kartu karya pada portofolio menavigasi ke artikel, dan halaman artikel menautkan kembali ke portofolio penulis jika aktif. Pemilik memilih dan mengurutkan hingga 20 karya public di halaman profil; karya unlisted dan private tidak dapat dipilih.
 
 Authentication endpoints have an IP rate limit. Passwords are never returned, and the model excludes password hashes from normal queries. Cookie security is enabled in production; serve the API over HTTPS and set the correct `CLIENT_ORIGIN` there.
 

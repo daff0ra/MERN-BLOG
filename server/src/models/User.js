@@ -33,6 +33,12 @@ const userSchema = new mongoose.Schema(
         default: [],
         validate: [(items) => items.length <= 5, 'A maximum of 5 links is allowed.'],
       },
+      portfolioPublic: { type: Boolean, default: false },
+      portfolioArticleIds: {
+        type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Article' }],
+        default: [],
+        validate: [(items) => items.length <= 20, 'A maximum of 20 portfolio articles is allowed.'],
+      },
     },
   },
   { timestamps: true, versionKey: false },

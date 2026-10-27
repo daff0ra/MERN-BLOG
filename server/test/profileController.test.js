@@ -14,7 +14,7 @@ test('get returns profile fields and falls back to username for display name', (
   controller.get({ user: { username: 'Person', profile: { summary: 'Builder', skills: ['Node.js'] } } }, res);
 
   assert.deepEqual(res.body, {
-    displayName: 'Person', summary: 'Builder', field: '', skills: ['Node.js'], links: [],
+    displayName: 'Person', summary: 'Builder', field: '', skills: ['Node.js'], links: [], portfolioPublic: false,
   });
 });
 
@@ -42,7 +42,7 @@ test('update stores only validated profile fields and returns the public profile
   assert.deepEqual(update, { $set: { 'profile.displayName': 'P. Person', 'profile.skills': ['Node.js'] } });
   assert.deepEqual(options, { new: true, runValidators: true });
   assert.deepEqual(res.body, {
-    displayName: 'P. Person', summary: '', field: '', skills: ['Node.js'], links: [],
+    displayName: 'P. Person', summary: '', field: '', skills: ['Node.js'], links: [], portfolioPublic: false,
   });
 });
 

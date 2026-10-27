@@ -112,7 +112,7 @@ exports.readPublic = async (req, res, next) => {
       shareSlug: req.params.slug,
       status: 'published',
       visibility: { $in: ['unlisted', 'public'] },
-    }).populate({ path: 'owner', select: 'username profile.displayName' }).lean();
+    }).populate({ path: 'owner', select: 'username profile.displayName profile.portfolioPublic' }).lean();
     if (!article) return res.status(404).json({ message: 'Article not found.' });
     return res.status(200).json({
       title: article.title,
@@ -120,6 +120,7 @@ exports.readPublic = async (req, res, next) => {
       summary: article.summary,
       topics: article.topics,
       author: article.owner?.profile?.displayName || article.owner?.username || 'Author',
+      authorPortfolioId: article.owner?.profile?.portfolioPublic ? article.owner._id : null,
       updatedAt: article.updatedAt,
     });
   } catch (error) { return next(error); }
