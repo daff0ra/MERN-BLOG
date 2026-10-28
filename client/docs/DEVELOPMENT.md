@@ -42,6 +42,8 @@ Jika endpoint atau payload server berubah, sesuaikan service dan dokumentasikan 
 - `styles/responsive/` memuat breakpoint lebar, tablet, ponsel, dan override tema responsif. `index.css` di tiap folder mencatat urutan impor.
 - Pertahankan palet krem dan outline hitam. Untuk aksen gunakan token seperti `--accent-lime`, `--accent-blue`, `--accent-coral`, `--accent-lavender`, `--accent-sand`, dan `--accent-mint`.
 - Tailwind diimpor dengan mode `important` agar utility dapat digunakan berdampingan dengan selector global yang sudah ada.
+- Navigasi sidebar pada breakpoint tablet dan ponsel menggunakan ikon yang terpusat dalam tombol berukuran tetap. Aturan flex menghilangkan gap untuk teks navigasi yang disembunyikan; ikon aktif menyatu dengan latar tombol tanpa kotak dalam.
+- Tombol **Tulis karya baru** memakai class khusus `create-article-button` bersama `primary-button`. Aturan responsifnya mengatur tombol ikon tanpa memengaruhi tombol primer lain; ikon tambah menyatu dengan latar tombol tanpa kotak atau garis tambahan.
 
 ## Alur kontribusi
 
@@ -63,3 +65,9 @@ Jika endpoint atau payload server berubah, sesuaikan service dan dokumentasikan 
 - Menghapus konfigurasi Axios global dari context agar credentials dikonfigurasi pada satu instance.
 
 Pemeriksaan terakhir setelah refaktor: `npm run lint` dan `npm run build` berhasil.
+
+### 2026-10-28
+
+- Menambahkan halaman bantuan pada route `/dashboard/help`, dengan tautan langsung ke editor, dashboard, dan profil.
+- Memusatkan ikon navigasi pada tampilan responsif dengan menghilangkan gap flex yang tersisa saat label disembunyikan, serta menyatukan ikon aktif dengan latar tombol tanpa garis dalam.
+- Memisahkan aturan responsif tombol **Tulis karya baru** ke class `create-article-button` agar ukuran, jarak, dan posisi ikonnya tidak berbenturan dengan aturan `.primary-button` umum. Latar ikon tambah menyatu dengan tombol tanpa garis dalam.

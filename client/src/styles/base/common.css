@@ -63,6 +63,15 @@
   border: 1px solid #496e56;
 }
 
+.create-article-button > span {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 24px;
+  height: 24px;
+  line-height: 1;
+}
+
 .primary-button:hover {
   background: #3a5f47;
   border-color: #3a5f47;
@@ -77,7 +86,7 @@
   margin-bottom: 4px;
 }
 
-.welcome-row > .primary-button span {
+.create-article-button > span {
   font-size: 18px;
   font-weight: 400;
   line-height: 12px;
