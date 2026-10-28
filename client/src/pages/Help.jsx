@@ -3,8 +3,8 @@ function Help({ onNavigate }) {
     <section className="mx-auto w-full max-w-5xl px-6 py-10 sm:px-8 lg:px-12" aria-labelledby="help-title">
       <div className="mb-8 max-w-2xl">
         <p className="eyebrow">RUANG KERJAMU</p>
-        <h1 id="help-title" className="mt-3 font-serif text-3xl font-bold tracking-tight text-stone-950 sm:text-4xl">Bantuan</h1>
-        <p className="mt-3 text-sm leading-6 text-stone-600">Pilih bagian yang ingin kamu lanjutkan. Tautan di bawah membuka halaman terkait langsung.</p>
+        <h1 id="help-title" className="mt-3 font-serif text-3xl font-bold tracking-tight text-stone-950 sm:text-4xl">Ruang Karya Support</h1>
+        <p className="mt-3 text-sm leading-6 text-stone-600">Bagaimana kami membantu anda ?.</p>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
